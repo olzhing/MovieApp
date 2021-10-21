@@ -11,7 +11,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      // Remove the debug banner
       debugShowCheckedModeBanner: false,
       title: 'Popcorn',
       home: HomePage(),
@@ -27,8 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
+
   final List<Map<String, dynamic>> _allUsers = [
     {"id": 1, "name": "First movie", "age": 2019},
     {"id": 2, "name": "Second movie", "age": 2020},
@@ -36,27 +34,22 @@ class _HomePageState extends State<HomePage> {
     {"id": 4, "name": "Forth movie", "age": 2022},
   ];
 
-  // This list holds the data for the list view
   List<Map<String, dynamic>> _foundUsers = [];
   @override
   initState() {
-    // at the beginning, all users are shown
     _foundUsers = _allUsers;
     super.initState();
   }
 
-  // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List<Map<String, dynamic>> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = _allUsers;
+    if (enteredKeyword.isEmpty) {      results = _allUsers;
     } else {
       results = _allUsers
           .where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
+      
     }
 
     // Refresh the UI
